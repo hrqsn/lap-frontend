@@ -1,0 +1,109 @@
+@layer components {
+  .btn {
+    @apply transition ease-in-out duration-75 inline-flex justify-center items-center rounded-md px-4 py-1.5 text-base font-medium focus:outline-none;
+  }
+
+  .btn-sm {
+    @apply px-4 py-1.5 text-sm font-medium text-gray-900 bg-gray-100 focus:outline-none hover:text-gray-600;
+  }
+
+  .btn-lg {
+    @apply px-10 py-3.5 text-base font-medium rounded-lg;
+  }
+
+  .btn-link {
+    @apply border-none;
+  }
+
+  .btn-loading {
+    @apply opacity-40;
+  }
+
+  .btn-primary {
+    @apply text-white bg-primary;
+  }
+}
+
+@layer utilities {
+  html, body, #__next {
+    position: relative;
+    @apply w-full bg-white text-gray-900;
+  }
+  
+  button, a {
+    @apply focus:outline-none;
+  }
+
+  a {
+    cursor: pointer;
+  }
+
+  .c-lap-visible .lap-try {
+    opacity: 0 !important;
+  }
+
+  .lap-try {
+    position: fixed;
+    right: 54px;
+    bottom: 96px;
+    opacity: 1;
+    transition: opacity .06s ease;
+  }
+
+  .lap-try > img {
+    height: 48px;
+  }
+
+  @media (min-width: 640px) {
+    .lap-try {
+      position: fixed;
+      right: 64px;
+      bottom: 104px;
+    }
+  }
+
+  @media (min-width: 728px) {
+    .lap-try {
+      position: fixed;
+      right: 80px;
+      bottom: 120px;
+    }
+  }
+
+  .color-preview:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+
+  .color-picker {
+    @apply cursor-pointer inline-flex mt-1 text-sm px-4 py-2 bg-gray-100 rounded-md;
+  }
+
+  .word-clamp {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .copied {
+    position: absolute;
+    color: #fff;
+    top: -16px;
+    left: calc(50% - 50px);
+    background: #010203;
+    align-items: center;
+    padding: 6px 10px;
+    font-size: 10px;
+    line-height: 1;
+    border-radius: 4px;
+    opacity: 0;
+    transition: top .2s ease, opacity .2s ease;
+    z-index: 0;
+  }
+
+  .copied.visible {
+    top: -28px;
+    opacity: 1;
+  }
+}
