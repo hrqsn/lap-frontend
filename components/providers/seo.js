@@ -13,7 +13,7 @@ const SeoConfig = {
     description: 'サイトに設置できる魔法の拍手ボタン👏',
     images: [
       {
-        url: 'https://halsakuragi.com/img/cover.png',
+        url: 'https://lap.halsakuragi.com/img/cover.png',
         alt: 'Hal Sakuragi'
       }
     ]
@@ -29,11 +29,11 @@ export default function Seo () {
       <DefaultSeo {...SeoConfig} />
       <Head>
         <meta name='theme-color' content='#000000' />
-        <link rel='apple-touch-icon' href='https://halsakuragi.com/favicon/apple-touch-icon.png' />
-        <link rel='icon' type='image/png' sizes='32x32' href='https://halsakuragi.com/favicon//favicon-32x32.png' />
-        <link rel='icon' type='image/png' sizes='16x16' href='https://halsakuragi.com/favicon//favicon-16x16.png' />
-        <link rel='icon' type='image/png' href='https://halsakuragi.com/favicon/android-chrome-256x256.png' sizes='256x256' />
-        <link rel='manifest' href='https://halsakuragi.com/favicon/site.webmanifest' />
+        <link rel='apple-touch-icon' href='https://lap.halsakuragi.com/favicon/apple-touch-icon.png' />
+        <link rel='icon' type='image/png' sizes='32x32' href='https://lap.halsakuragi.com/favicon//favicon-32x32.png' />
+        <link rel='icon' type='image/png' sizes='16x16' href='https://lap.halsakuragi.com/favicon//favicon-16x16.png' />
+        <link rel='icon' type='image/png' href='https://lap.halsakuragi.com/favicon/android-chrome-256x256.png' sizes='256x256' />
+        <link rel='manifest' href='https://lap.halsakuragi.com/favicon/site.webmanifest' />
       </Head>
     </>
   )
