@@ -94,7 +94,7 @@ export default function Home () {
 
   const generateCode = (_uid) => {
     const code = `
-      <div class="c-lap-container" data-lap-id="${_uid}" data-lap-bg="${color.bg.split('#')[1]}" data-lap-color="${color.color.split('#')[1]}" data-lap-textColor="${color.textColor.split('#')[1]}"><script src="https://storage.googleapis.com/halsakuragi/lap/1.0.0/widget.min.js"></script></div>`
+      <div class="c-lap-container" data-lap-id="${_uid}" data-lap-bg="${color.bg.split('#')[1]}" data-lap-color="${color.color.split('#')[1]}" data-lap-textcolor="${color.textColor.split('#')[1]}"><script src="https://storage.googleapis.com/halsakuragi/lap/1.0.0/widget.min.js"></script></div>`
     return setCode(code)
   }
 
