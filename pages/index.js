@@ -30,11 +30,12 @@ export default function Home () {
     bg: '#FFFFFF',
     textColor: '#6233A9'
   })
-  const [bgColor, setBgColor] = useState('#010203')
+  const [bgColor, setBgColor] = useState('#FFFFFF')
   const [uid, setUid] = useState(null)
   const [code, setCode] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [isContinue, setIsContinue] = useState(false)
   const [currentValue, setCurrentValue] = useStorage('lap_current', null)
 
   const copied = useRef(null)
@@ -70,11 +71,13 @@ export default function Home () {
     setCode(null)
     setLoading(true)
     setError(null)
+    setIsContinue(false)
     if (currentValue !== null) {
       if (window.confirm('前回生成したコードが残っています。新しく生成せずに復元しますか？')) {
         setLoading(false)
         setIsEditorOpen(true)
         setIsPreviewOpen(false)
+        setIsContinue(true)
         setTimeout(() => scrollTo({
           left: 0,
           top: 640,
@@ -173,8 +176,8 @@ export default function Home () {
         )}
         {isEditorOpen && !isPreviewOpen && (
           <div className='bg-gray-100 p-8 sm:p-20 md:-mx-20 mt-64 rounded-md'>
-            <h1 className='text-xl font-bold'>コードを生成しました</h1>
-            <p className='mt-6 leading-normal'>コードを生成しました。<br />このコードをコピーして、HTMLのbodyタグ内に貼り付ければ設置完了です。<br />必要に応じて、<span className='cursor-pointer text-primary underline' onClick={() => setIsPreviewOpen(true)}>テーマカラーを編集</span> できます。</p>
+            <h1 className='text-xl font-bold'>{isContinue ? 'コードを復元しました' : 'コードを生成しました'}</h1>
+            <p className='mt-6 leading-normal'>{isContinue ? 'コードを復元しました' : 'コードを生成しました'}。<br />このコードをコピーして、HTMLのbodyタグ内に貼り付ければ設置完了です。<br />必要に応じて、<span className='cursor-pointer text-primary underline' onClick={() => setIsPreviewOpen(true)}>テーマカラーを編集</span> できます。</p>
             <a href='https://halsakuragi.com/blog/lap' target='_blank' rel='noopener noreferrer' className='inline-block mt-4 text-sm text-primary'>詳しい設置方法はこちら</a>
             <div className='mt-8'>
               <div className='mt-1 flex rounded-md shadow-sm'>
