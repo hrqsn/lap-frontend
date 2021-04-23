@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@rehooks/local-storage": "^2.4.1",
     "autoprefixer": "^10.2.5",
     "axios": "^0.21.1",
     "next": "10.1.3",

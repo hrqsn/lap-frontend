@@ -1,8 +1,26 @@
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import axios from '@/lib/axios'
 import { SERVER_BASE_URL } from '@/lib/utils/constants'
+
+const useStorage = (key, defaultValue) => {
+  const [value, setValue] = useState(defaultValue)
+
+  useEffect(() => {
+    const currentValue = window.localStorage.getItem(key)
+
+    if (currentValue !== null) {
+      setValue(JSON.parse(currentValue))
+    }
+  }, [key])
+
+  useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(value))
+  }, [key, value])
+
+  return [value, setValue]
+}
 
 export default function Home () {
   const [isEditorOpen, setIsEditorOpen] = useState(false)
@@ -17,33 +35,57 @@ export default function Home () {
   const [code, setCode] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [currentValue, setCurrentValue] = useStorage('lap_current', null)
 
   const copied = useRef(null)
   const bgColorPicker = useRef(null)
 
-  const subscription = async () => {
-    setUid(null)
-    setCode(null)
-    setLoading(true)
-    setError(null)
+  const _subscription = async () => {
     try {
       const res = await axios.post(`${SERVER_BASE_URL}/new`)
       if (res.data.success) {
         setUid(res.data.uid)
         setLoading(false)
         setIsEditorOpen(true)
+        setIsPreviewOpen(false)
         setTimeout(() => scrollTo({
           left: 0,
           top: 640,
           behavior: 'smooth'
         }), 240)
         generateCode(res.data.uid)
+        setCurrentValue(res.data.uid)
         return
       }
     } catch (error) {
       console.error(error)
       setError(error.message)
       setLoading(false)
+      return
+    }
+  }
+
+  const subscription = async () => {
+    setUid(null)
+    setCode(null)
+    setLoading(true)
+    setError(null)
+    if (currentValue !== null) {
+      if (window.confirm('前回生成したコードが残っています。新しく生成せずに復元しますか？')) {
+        setLoading(false)
+        setIsEditorOpen(true)
+        setIsPreviewOpen(false)
+        setTimeout(() => scrollTo({
+          left: 0,
+          top: 640,
+          behavior: 'smooth'
+        }), 240)
+        generateCode(currentValue)
+      } else {
+        _subscription()
+      }
+    } else {
+      _subscription()
     }
   }
 
