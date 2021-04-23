@@ -1,9 +1,8 @@
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-import { useEffect, useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import axios from '@/lib/axios'
 import { SERVER_BASE_URL } from '@/lib/utils/constants'
-import { Copy } from 'react-feather'
 
 export default function Home () {
   const [isEditorOpen, setIsEditorOpen] = useState(false)
@@ -66,7 +65,7 @@ export default function Home () {
 
       <main className='max-w-screen-md mx-auto px-4'>
         <div className='mt-24 sm:mt-32'>
-          <h1 className='text-2xl sm:text-4xl font-bold text-primary'>感謝の気持ちを送る、もらう</h1>
+          <h1 className='text-2xl sm:text-4xl font-bold text-primary'>感謝の気持ちを贈る、もらう</h1>
           <p className='mt-6 text-gray-800'>サイトに設置できる拍手ボタン「Lap」を用意しました。<br />生成されたコードをHTMLに貼り付けるだけで、訪問者からフィードバック👏を受け取れます。</p>
           {error && <p className='text-center mt-8 text-red-600'>{error}</p>}
           <div className='mt-10'>

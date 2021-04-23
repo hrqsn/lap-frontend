@@ -2,14 +2,14 @@ import Head from 'next/head'
 import { DefaultSeo } from 'next-seo'
 
 const SeoConfig = {
-  title: 'Lap | Hal Sakuragi',
+  title: 'Lap - 感謝の気持ちを贈る、もらう',
   description: 'サイトに設置できる魔法の拍手ボタン👏',
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
     url: 'https://lap.halsakuragi.com',
-    site_name: 'Lap | Hal Sakuragi',
-    title: 'Lap | Hal Sakuragi',
+    site_name: 'Lap',
+    title: 'Lap - 感謝の気持ちを贈る、もらう',
     description: 'サイトに設置できる魔法の拍手ボタン👏',
     images: [
       {
