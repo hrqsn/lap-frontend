@@ -1,26 +1,31 @@
 /**
  * Widget Functions
  */
-const container = document.getElementsByClassName('c-lap-container');
-container[0].style.position = 'fixed';
-container[0].style.right = '0';
-container[0].style.bottom = '0';
+const container = document.getElementsByClassName('c-lap-container')
+container[0].style.position = 'fixed'
+container[0].style.right = '0'
+container[0].style.bottom = '0'
 
-var div = document.createElement('div');
-div.id = 'c-lap';
+const div = document.createElement('div')
+div.id = 'c-lap'
 
-const lapColor = container[0].dataset.lapColor;
-const lapTextColor = container[0].dataset.lapTextcolor;
-const lapBg = container[0].dataset.lapBg;
-const lapId = container[0].dataset.lapId;
+const lapColor = container[0].dataset.lapColor
+const lapTextColor = container[0].dataset.lapTextcolor
+const lapBg = container[0].dataset.lapBg
+const lapId = container[0].dataset.lapId
 
-container[0].appendChild(div);
+container[0].appendChild(div)
 
-let widget = 
-'<div class="c-lap" onClick="clap()">\
+let widget =
+'<div class="c-lap">\
 <div class="c-lap-inner">\
   <div class="c-lap-confettis"></div>\
-  <button class="c-lap-btn">\
+  <a class="c-lap-info" href="https://lap.halsakuragi.com" target="_blank" rel="noopener noreferrer">\
+    <svg class="c-lap-info-bg" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">\
+      <path class="c-lap-info-color" d="M12 1.09616C5.9784 1.09616 1.09619 5.97837 1.09619 12C1.09619 18.0216 5.9784 22.9039 12 22.9039C18.0217 22.9039 22.9039 18.0216 22.9039 12C22.9039 5.97837 18.0217 1.09616 12 1.09616ZM14.2717 17.9964C13.7092 18.2164 13.2621 18.3858 12.9267 18.5012C12.5914 18.6166 12.2056 18.6743 11.7621 18.6743C11.0842 18.6743 10.5541 18.5084 10.1755 18.1767C9.80052 17.8486 9.61302 17.4267 9.61302 16.9147C9.61302 16.7164 9.62744 16.5144 9.65629 16.3089C9.68153 16.0998 9.7284 15.869 9.7897 15.6058L10.4928 13.125C10.5541 12.887 10.6082 12.6635 10.6515 12.4507C10.6947 12.238 10.7128 12.0433 10.7128 11.8666C10.7128 11.5529 10.6479 11.3293 10.5181 11.2067C10.3847 11.0805 10.1359 11.0192 9.76807 11.0192C9.58778 11.0192 9.40028 11.0481 9.20917 11.1022C9.01807 11.1599 8.85581 11.2139 8.71879 11.2644L8.90629 10.5C9.36422 10.3125 9.80412 10.1539 10.226 10.0204C10.6443 9.88703 11.0445 9.81852 11.4159 9.81852C12.0902 9.81852 12.613 9.98438 12.9772 10.3089C13.3414 10.6334 13.5253 11.0589 13.5253 11.5781C13.5253 11.6863 13.5145 11.8774 13.4892 12.1478C13.464 12.4183 13.4171 12.6671 13.3486 12.8978L12.6491 15.3714C12.5914 15.5697 12.5409 15.7969 12.494 16.0493C12.4508 16.3017 12.4291 16.4964 12.4291 16.6262C12.4291 16.9543 12.5012 17.1815 12.6491 17.3005C12.7933 17.4195 13.0493 17.4772 13.4135 17.4772C13.583 17.4772 13.7741 17.4483 13.9904 17.3906C14.2032 17.3293 14.3582 17.2789 14.4556 17.232L14.2717 17.9964ZM14.1455 7.95433C13.8209 8.25722 13.4279 8.40866 12.97 8.40866C12.5121 8.40866 12.1154 8.25722 11.7873 7.95433C11.4592 7.65145 11.2969 7.28366 11.2969 6.85457C11.2969 6.42549 11.4628 6.05409 11.7873 5.7476C12.1154 5.44111 12.5121 5.28967 12.97 5.28967C13.4279 5.28967 13.8209 5.44111 14.1455 5.7476C14.4736 6.05409 14.6359 6.42549 14.6359 6.85457C14.6359 7.28366 14.4736 7.65145 14.1455 7.95433Z"/>\
+    </svg>\
+  </a>\
+  <button class="c-lap-btn" onClick="clap()">\
     <div class="c-lap-btn-inner">\
       <div class="c-lap-btn-svg">\
         <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">\
@@ -42,7 +47,7 @@ let widget =
 <div class="c-lap-count-bubble-wrapper"></div>\
 </div>\
 <link rel="preconnect" href="https://fonts.gstatic.com">\
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">';
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">'
 
 widget += `
 <style>
@@ -89,7 +94,32 @@ p {
   }
 }
 
+.c-lap-info {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  padding-right: 16px;
+  transform: translate3d(-100%,-50%,0);
+  display: none;
+  opacity: 0;
+  cursor: help;
+}
+
+.c-lap:hover .c-lap-info {
+  display: inline-block;
+  opacity: 1;
+}
+
+.c-lap-info-bg {
+  fill: var(--lap-color);
+}
+
+.c-lap-info-color {
+  fill: var(--text-bg);
+}
+
 .c-lap-btn {
+  position: relative;
   width: 64px;
   height: 64px;
   display: flex;
@@ -259,107 +289,123 @@ i.confetti {
   }
 }
 </style>
-`.toString().replace(/(\n)/g, '');
+`.toString().replace(/(\n)/g, '')
 
-div.insertAdjacentHTML('beforeend', widget);
+div.insertAdjacentHTML('beforeend', widget)
 
 /**
  * Lap Functions
  */
- let clapCount = 0
- let _clapCount = 0
- let isClapping = false
- const lapConfettisDom = document.getElementsByClassName('c-lap-confettis')
- const lapCountDom = document.getElementsByClassName('c-lap-count')
- const lapCountBubbleWrapperDom = document.getElementsByClassName('c-lap-count-bubble-wrapper')
- const lapClapDom = document.getElementsByClassName('c-lap-clap')
- const lapBtn = document.getElementsByClassName('c-lap-btn')
- const intervals = []
+let clapCount = 0
+let _clapCount = 0
+let isClapping = false
+const lapConfettisDom = document.getElementsByClassName('c-lap-confettis')
+const lapCountDom = document.getElementsByClassName('c-lap-count')
+const lapCountBubbleWrapperDom = document.getElementsByClassName('c-lap-count-bubble-wrapper')
+const lapClapDom = document.getElementsByClassName('c-lap-clap')
+const lapBtn = document.getElementsByClassName('c-lap-btn')
+const intervals = []
 
- window.onload = function() {
+const pow = Math.pow; const floor = Math.floor; const abs = Math.abs; const log = Math.log
+const abbrev = 'kmb'
+
+function round (n, precision) {
+  const prec = Math.pow(10, precision)
+  return Math.round(n * prec) / prec
+}
+
+function format (n) {
+  let base = floor(log(abs(n)) / log(1000))
+  const suffix = abbrev[Math.min(2, base - 1)]
+  base = abbrev.indexOf(suffix) + 1
+  return suffix ? round(n / pow(1000, base), 2) + suffix : '' + n
+}
+
+const checkIsClapping = function () {
+  if (clapCount === _clapCount) {
+    return endClap()
+  } else {
+    return _clapCount = clapCount
+  }
+}
+
+const deleteBubble = function () {
+  lapCountBubbleWrapperDom[0].children[0].remove()
+}
+
+function random (max) {
+  return Math.random() * (max - 0) + 0
+}
+
+function createConfetti () {
+  const c = document.createDocumentFragment()
+  const lc = document.createElement('c-lap-contetti')
+  for (let i = 0; i < 20; i++) {
+    const styles = 'transform: translate3d(' + (random(80) - 40) + 'px, ' + (random(80) - 40) + 'px, 0) rotate(' + random(360) + 'deg);\
+                     background: hsla(' + random(360) + ',90%,50%,1);\
+                     animation: bang 240ms ease forwards, opacity 240ms ease-in-out forwards;'
+    const e = document.createElement('i')
+    e.className = 'confetti'
+    e.style.cssText = styles.toString()
+    lc.appendChild(e)
+  }
+  lapConfettisDom[0].appendChild(lc)
+  setTimeout(function () {
+    lapConfettisDom[0].children[0].remove()
+  }, 240)
+}
+
+function clap () {
+  if (!isClapping) intervals.push(setInterval(checkIsClapping, 800))
+  isClapping = true
+  clapCount++
+  document.body.classList.add('c-lap-visible')
+  lapCountDom[0].classList.add('c-lap-count-visible')
+  lapBtn[0].style.webkitTransform = 'scale(0.96)'
+  setTimeout(function () {
+    lapBtn[0].style.webkitTransform = 'scale(1)'
+  }, 80)
+  lapCountDom[0].innerText = `+${clapCount}`
+  createConfetti()
+  if (clapCount >= 30) {
+    endClap()
+  } else if (clapCount > 0) {
+    lapClapDom[0].innerText = ''
+  }
+}
+
+function endClap () {
   const xhr = new XMLHttpRequest()
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4) { // 通信の完了時
-      if (xhr.status == 200) { // 通信の成功時
+  xhr.open('PUT', `https://api.lap.halsakuragi.com/counts/${lapId}`)
+  xhr.setRequestHeader('content-type', 'application/json')
+  xhr.send(JSON.stringify({
+    count: clapCount
+  }))
+  const lapCount = document.getElementsByClassName('c-lap-btn-count')
+  lapCount[0].innerText = format(Number(lapCount[0].innerText) + clapCount)
+  document.body.classList.remove('c-lap-visible')
+  lapCountDom[0].classList.remove('c-lap-count-visible')
+  lapCountBubbleWrapperDom[0].insertAdjacentHTML('beforeend', `<div class="c-lap-count-bubble">+${clapCount}</div>`)
+  setTimeout(deleteBubble, 2000)
+  lapClapDom[0].innerText = '拍手を贈る'
+  lapCountDom[0].innerText = `+${1}`
+  clapCount = 0
+  _clapCount = 0
+  isClapping = false
+  clearInterval(intervals.shift())
+}
+
+window.onload = function () {
+  const xhr = new XMLHttpRequest()
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
         const count = JSON.parse(xhr.responseText)
         const lapCount = document.getElementsByClassName('c-lap-btn-count')
-        lapCount[0].innerText = String(count.count)
+        lapCount[0].innerText = format(count.count)
       }
     }
   }
   xhr.open('GET', `https://api.lap.halsakuragi.com/counts/${lapId}`)
-  xhr.send(null);
- }
- 
- const checkIsClapping = function () {
-   if (clapCount === _clapCount) {
-     return endClap()
-   } else {
-     return _clapCount = clapCount
-   }
- }
- const deleteBubble = function () {
-   lapCountBubbleWrapperDom[0].children[0].remove()
- }
- 
- function random (max) {
-   return Math.random() * (max - 0) + 0;
- }
- 
- function createConfetti () {
-   const c = document.createDocumentFragment();
-   const lc = document.createElement("c-lap-contetti");
-   for (let i = 0; i < 20; i++) {
-     const styles = 'transform: translate3d(' + (random(80) - 40) + 'px, ' + (random(80) - 40) + 'px, 0) rotate(' + random(360) + 'deg);\
-                     background: hsla('+random(360)+',90%,50%,1);\
-                     animation: bang 240ms ease forwards, opacity 240ms ease-in-out forwards;';
-     const e = document.createElement("i");
-     e.className = 'confetti';
-     e.style.cssText = styles.toString();
-     lc.appendChild(e);
-   }
-   lapConfettisDom[0].appendChild(lc);
-   setTimeout(function() {
-     lapConfettisDom[0].children[0].remove()}, 240);
- }
- 
- function clap () {
-   if (!isClapping) intervals.push(setInterval(checkIsClapping, 800))
-   isClapping = true
-   clapCount++
-   document.body.classList.add('c-lap-visible')
-   lapCountDom[0].classList.add('c-lap-count-visible')
-   lapBtn[0].style.webkitTransform = "scale(0.96)"
-   setTimeout(function() {
-     lapBtn[0].style.webkitTransform = "scale(1)"
-   }, 80)
-   lapCountDom[0].innerText = `+${clapCount}`
-   createConfetti();
-   if (clapCount >= 30) {
-     endClap()
-   } else if (clapCount > 0) {
-     lapClapDom[0].innerText = ''
-   }
- }
- 
- function endClap () {
-   const xhr = new XMLHttpRequest()
-   xhr.open('PUT', `https://api.lap.halsakuragi.com/counts/${lapId}`)
-   xhr.setRequestHeader('content-type', 'application/json')
-   xhr.send(JSON.stringify({
-    "count": clapCount
-  }))
-   const lapCount = document.getElementsByClassName('c-lap-btn-count')
-   lapCount[0].innerText = Number(lapCount[0].innerText) + clapCount
-   document.body.classList.remove('c-lap-visible')
-   lapCountDom[0].classList.remove('c-lap-count-visible')
-   lapCountBubbleWrapperDom[0].insertAdjacentHTML('beforeend', `<div class="c-lap-count-bubble">+${clapCount}</div>`)
-   setTimeout(deleteBubble, 2000)
-   lapClapDom[0].innerText = '拍手を贈る'
-   lapCountDom[0].innerText = `+${1}`
-   clapCount = 0
-   _clapCount = 0
-   isClapping = false
-   clearInterval(intervals.shift())
- }
- 
+  xhr.send(null)
+}

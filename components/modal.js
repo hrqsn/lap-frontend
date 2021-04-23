@@ -19,7 +19,7 @@ const Modal = ({ setIsModalOpen, isOpen }) => {
             <div className='animation-modal inline-block align-bottom bg-white rounded-lg text-left overflow-hidden transform transition-all max-w-screen-md w-full p-4'>
               <div className='grid grid-cols-7 gap-x-12'>
                 <div className='col-span-7 sm:col-span-3'>
-                  <div className='color-preview bg-black rounded-md w-full h-full'></div>
+                  <div className='color-preview bg-black rounded-md w-full h-full' />
                 </div>
                 <div className='col-span-7 sm:col-span-4 pt-8'>
                   <h1 className='text-xl font-bold'>テーマカラーを編集</h1>
